@@ -1,11 +1,12 @@
 import Heading from "../ui/Heading";
 import Row from "../ui/Row";
 import CabinTable from "../features/cabins/CabinTable";
+import Button from "../ui/Button";
+import { useState } from "react";
+import CreateCabinForm from "../features/cabins/CreateCabinForm";
 
 function Cabins() {
-  // useEffect(function () {
-  //   getCabins().then((data) => console.log(data));
-  // }, []);
+  const [showFrom, setShowForm] = useState(false);
 
   return (
     <>
@@ -13,8 +14,10 @@ function Cabins() {
         <Heading as="h1">All cabins</Heading>
         <p>filter / sort</p>
       </Row>
-      <Row type="horizontal">
+      <Row>
         <CabinTable />
+        <Button onClick={() => setShowForm(!showFrom)}>Add new cabin</Button>
+        {showFrom && <CreateCabinForm />}
       </Row>
     </>
   );
