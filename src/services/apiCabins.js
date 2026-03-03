@@ -1,4 +1,4 @@
-import supabase from "./supabase";
+import supabase, { supabaseUrl } from "./supabase";
 
 async function getCabins() {
   let { data, error } = await supabase.from("cabins").select("*");
@@ -10,14 +10,36 @@ async function getCabins() {
   return data;
 }
 
-export async function createCabin(newCabin) {
+export async function createCabin(newCabin, id) {
+  const imageName = `${Math.random()}-${newCabin.image.name}`.replaceAll(
+    "/",
+    ""
+  );
+  const imagePath = `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;
+
+  // https://sqwnldoxpepieuawjvop.supabase.co/storage/v1/object/public/cabin-images/cabin-001.jpg
+
+  // 1. Cerate Cabin
   const { data, error } = await supabase
     .from("cabins")
-    .insert([newCabin])
-    .select();
+    .insert([{ ...newCabin, image: imagePath }]);
   if (error) {
     console.error(error);
     throw new Error("Canin could not be created");
+  }
+  // 2. Uplaod file
+  const { error: storageError } = await supabase.storage
+    .from("cabin-images")
+    .upload(imageName, newCabin.image);
+  console.log(storageError);
+  if (storageError) {
+    await supabase.from("cabins").delete().eq("id", data.id);
+  }
+  if (error) {
+    console.error(error);
+    throw new Error(
+      "Canin could not be u[laod iamge and the cabin was not careted"
+    );
   }
   return data;
 }
