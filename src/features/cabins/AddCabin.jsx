@@ -1,26 +1,27 @@
 import { useState } from "react";
 import Button from "../../ui/Button";
-import Model from "../../ui/Modal";
+import Modal from "../../ui/Modal";
 import CreateCabinForm from "./CreateCabinForm";
 import CabinTable from "./CabinTable";
 
 function AddCabin() {
   return (
-    <Model>
-      <Model.Open opens="cabin-form">
-        <Button>Add New Cabin</Button>
-      </Model.Open>
-      <Model.Window name="cabin-form">
-        <CreateCabinForm />
-      </Model.Window>
-
-      <Model.Open opens="table">
+    <Modal>
+      <div>
+        <Modal.Open opens="cabin-form">
+          <Button>Add New Cabin</Button>
+        </Modal.Open>
+        <Modal.Window name="cabin-form">
+          <CreateCabinForm />
+        </Modal.Window>
+      </div>
+      {/* <Modal.Open opens="table">
         <Button>Show Table</Button>
-      </Model.Open>
+      </Modal.Open>
       <Model.Window name="table">
         <CabinTable />
-      </Model.Window>
-    </Model>
+      </Model.Window> */}
+    </Modal>
   );
 }
 // function AddCabin() {
