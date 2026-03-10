@@ -4,6 +4,7 @@ import getCabins from "../../services/apiCabins";
 import Spinner from "../../ui/Spinner";
 import CabinRow from "./CabinRow";
 import { useCabin } from "./useCabin";
+import Empty from "../../ui/Empty";
 
 const Table = styled.div`
   border: 1px solid var(--color-grey-200);
@@ -33,6 +34,8 @@ function CabinTable() {
   const { isLoading, cabins } = useCabin();
 
   if (isLoading) return <Spinner />;
+
+  if (!cabins.length) return <Empty resourceName="Cabins" />;
 
   return (
     <Table role="table">
