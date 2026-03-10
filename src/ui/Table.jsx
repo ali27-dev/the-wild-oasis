@@ -88,16 +88,21 @@ function Row({ children }) {
     </StyledRow>
   );
 }
+
 function Body({ data, render }) {
-  if (!data.length) return <Empty>No data to show at the moment</Empty>;
+  if (!data.length)
+    return (
+      <Empty>
+        No data to show at the moment,Please Click any of filter buttons
+      </Empty>
+    );
   return <StyledBody>{data.map(render)}</StyledBody>;
 }
 // function Footer(params) {}
 
 Table.Header = Header;
-Table.Row = Row;
 Table.Body = Body;
+Table.Row = Row;
 Table.Footer = Footer;
-Table.Header = Header;
 
 export default Table;
