@@ -12,6 +12,9 @@ import { useMoveBack } from "../../hooks/useMoveBack";
 import { useBooking } from "./useBooking";
 import Spinner from "../../ui/Spinner";
 import { useNavigate } from "react-router-dom";
+import Checkbox from "../../ui/Checkbox";
+import { useState } from "react";
+import { add } from "date-fns/fp";
 
 const HeadingGroup = styled.div`
   display: flex;
@@ -21,6 +24,7 @@ const HeadingGroup = styled.div`
 
 function BookingDetail() {
   const { booking, isLoading } = useBooking();
+
   const moveBack = useMoveBack();
   const Navigate = useNavigate();
   // const status = "checked-in";
