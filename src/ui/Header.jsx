@@ -5,7 +5,7 @@ import UserAvatar from "../features/authentication/UserAvatar";
 const StyledHeader = styled.header`
   background-color: var(--color-grey-0);
   padding: 2.5rem 2.8rem;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px var(--color-grey-100);
 
   display: flex;
   gap: 1.2rem;
